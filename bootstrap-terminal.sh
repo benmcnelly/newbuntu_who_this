@@ -1,3 +1,4 @@
+cat > bootstrap-terminal.sh <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
 
@@ -16,7 +17,7 @@ echo "==> Creating theme directory"
 mkdir -p "$THEME_DIR"
 
 echo "==> Writing theme"
-cat > "$THEME_FILE" <<'EOF'
+cat > "$THEME_FILE" <<'JSON'
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "version": 3,
@@ -102,7 +103,7 @@ cat > "$THEME_FILE" <<'EOF'
     }
   ]
 }
-EOF
+JSON
 
 echo "==> Backing up bashrc"
 cp "$BASHRC" "$BASHRC.bak.$(date +%Y%m%d%H%M%S)"
@@ -112,12 +113,14 @@ grep -v 'oh-my-posh init bash' "$BASHRC" | grep -v 'export PATH="$HOME/.local/bi
 mv "$BASHRC.tmp" "$BASHRC"
 
 echo "==> Adding PATH and init"
-cat >> "$BASHRC" <<'EOF'
+cat >> "$BASHRC" <<'BASHRC_EOF'
 
 export PATH="$HOME/.local/bin:$PATH"
 eval "$(oh-my-posh init bash --config "$HOME/.config/ohmyposh/twoline.omp.json")"
-EOF
+BASHRC_EOF
 
 echo
 echo "Done."
+echo "Run: source ~/.bashrc"
 echo "Reconnect SSH to confirm."
+EOF
