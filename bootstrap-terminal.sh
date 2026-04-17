@@ -1,9 +1,4 @@
-from pathlib import Path
-
-repo_dir = Path("/mnt/data/ubuntu-terminal-bootstrap")
-repo_dir.mkdir(parents=True, exist_ok=True)
-
-script = """#!/usr/bin/env bash
+#!/usr/bin/env bash
 set -euo pipefail
 
 THEME_DIR="$HOME/.config/ohmyposh"
@@ -125,29 +120,4 @@ EOF
 
 echo
 echo "Done."
-echo "Open a new SSH session to confirm it sticks."
-echo "If icons look wrong, fix the font in your local terminal."
-"""
-
-readme = """# Ubuntu Terminal Bootstrap
-
-Simple bootstrap script for a fresh Ubuntu server to install **Oh My Posh** and configure a clean two-line Bash prompt.
-
-## What it does
-
-- installs `curl`, `unzip`, and `git`
-- installs `oh-my-posh`
-- writes a custom two-line theme
-- updates `~/.bashrc`
-- keeps the prompt persistent across SSH reconnects
-
-## Files
-
-- `bootstrap-terminal.sh` — installer script
-
-## Usage
-
-### Option 1: run directly on a server after cloning
-
-```bash
-bash bootstrap-terminal.sh
+echo "Reconnect SSH to confirm."
